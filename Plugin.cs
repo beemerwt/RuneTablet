@@ -10,6 +10,7 @@ using UnityEngine;
 
 namespace RuneTablet
 {
+    [BepInDependency("com.jotunn.jotunn")]
     [BepInPlugin(RuneTabletGuid, RuneTabletName, NumericVersion)]
     public class Plugin : BaseUnityPlugin
     {
