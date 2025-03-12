@@ -17,19 +17,26 @@
 
   <ItemGroup>
     <Compile Remove="libraries\**" />
+    <Compile Remove="releases\**" />
     <EmbeddedResource Remove="libraries\**" />
+    <EmbeddedResource Remove="releases\**" />
     <None Remove="libraries\**" />
+    <None Remove="releases\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Destructible.cs" />
     <Compile Remove="ItemDrop.cs" />
-    <Compile Remove="Location.cs" />
     <Compile Remove="LocationProxy.cs" />
-    <Compile Remove="ZoneSystem.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove=".gitattributes" />
+    <None Remove=".gitignore" />
+    <None Remove="icon.png" />
+    <None Remove="manifest.json" />
+    <None Remove="README.md" />
+    <None Remove="release.bat" />
     <None Remove="rune_crystal.png" />
     <None Remove="rune_tablet.png" />
   </ItemGroup>
@@ -60,6 +67,9 @@
     </Reference>
     <Reference Include="netstandard">
       <HintPath>$(VALHEIM_INSTALL)\valheim_Data\Managed\netstandard.dll</HintPath>
+    </Reference>
+    <Reference Include="Splatform">
+      <HintPath>$(VALHEIM_INSTALL)\valheim_Data\Managed\Splatform.dll</HintPath>
     </Reference>
     <Reference Include="SoftReferenceableAssets">
       <HintPath>..\..\..\Games\Steam\steamapps\common\Valheim\valheim_Data\Managed\SoftReferenceableAssets.dll</HintPath>
