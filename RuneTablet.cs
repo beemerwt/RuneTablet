@@ -13,6 +13,15 @@ namespace RuneTablet
     public class RuneTablet : CustomItem
     {
         internal static Sprite IconSprite;
+		private static Dictionary<Heightmap.Biome, string[]> BiomeDungeons = new() {
+			{ Heightmap.Biome.AshLands, [] },
+			{ Heightmap.Biome.BlackForest, ["Hildir_crypt", "Crypt2", "Crypt3", "Crypt4"] },
+			{ Heightmap.Biome.Mistlands, ["Mistlands_DvergrTownEntrance1", "Mistlands_DvergrTownEntrance2"] },
+			{ Heightmap.Biome.DeepNorth, ["Hildir_cave", "MountainCave02"] },
+			{ Heightmap.Biome.Mountain, ["Hildir_cave", "MountainCave02"] },
+			{ Heightmap.Biome.Plains, ["GoblinCamp2", "StoneTower1", "StoneTower3", "Hildir_plainsfortress"] },
+			{ Heightmap.Biome.Swamp, ["SunkenCrypt4"] }
+		};
 
         public RuneTablet() : base("RuneTablet", true, new ItemConfig() {
             Name = "$item_runetablet",
@@ -103,36 +112,28 @@ namespace RuneTablet
             return new Tuple<string, Vector3>(locationType, locationPos);
         }
 
-        public static void DiscoverNearestDungeon(Player player, Heightmap.Biome biome)
+        public static bool DiscoverNearestDungeon(Player player, Heightmap.Biome biome)
         {
-            string[] locationTypes = biome switch {
-                Heightmap.Biome.AshLands => [""],
-                Heightmap.Biome.BlackForest => ["Hildir_crypt", "Crypt2", "Crypt3", "Crypt4"],
-                Heightmap.Biome.Mistlands => ["Mistlands_DvergrTownEntrance1", "Mistlands_DvergrTownEntrance2"],
-                Heightmap.Biome.DeepNorth => ["Hildir_cave", "MountainCave02"],
-                Heightmap.Biome.Mountain => ["Hildir_cave", "MountainCave02"],
-                Heightmap.Biome.Plains => ["GoblinCamp2", "StoneTower1", "StoneTower3", "Hildir_plainsfortress"],
-                Heightmap.Biome.Swamp => ["SunkenCrypt4"],
-                _ => null
-            };
-
-            if (locationTypes == null)
+			if (!BiomeDungeons.TryGetValue(biome, out var locationTypes))
             {
                 Plugin.Logger.LogWarning($"DiscoverNearestDungeon: Invalid biome {biome}");
-                return;
+				return false;
             }
 
             var playerPos = player.transform.position;
             var closestLocation = FindClosestLocationFromTypes(locationTypes, playerPos);
             if (closestLocation == null)
             {
-                Plugin.Logger.LogWarning("DiscoverNearestDungeon: No location found");
-                return;
+				Player.m_localPlayer.Message(MessageHud.MessageType.Center,
+					"<color=red>No locations found</color>");
+
+				Plugin.Logger.LogWarning("DiscoverNearestDungeon: No locations found");
+				return false;
             }
 
-            var closestType = closestLocation.Item1;
             var closestPos = closestLocation.Item2;
-            Game.instance.DiscoverClosestLocation(closestType, closestPos, Helper.GetPinName(closestType), (int)Minimap.PinType.Hildir1);
+			var pinName = Localization.instance.Localize(Helper.GetPinName(closestLocation.Item1));
+			return Minimap.instance.DiscoverLocation(closestPos, Minimap.PinType.Hildir1, pinName, true);
         }
     }
 }
