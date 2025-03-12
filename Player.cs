@@ -1,9 +1,4 @@
 ﻿using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RuneTablet
 {
@@ -11,22 +6,22 @@ namespace RuneTablet
     public class PlayerPatches {
         [HarmonyPostfix]
         [HarmonyPatch(nameof(Player.Save))]
-		public static void SavePostfix()
+        public static void SavePostfix()
         {
-			if (Player.m_localPlayer == null)
-				return;
+            if (Player.m_localPlayer == null)
+                return;
 
-			Plugin.SaveToDisk();
+            Plugin.SaveToDisk();
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(nameof(Player.Load))]
-		public static void LoadPostfix()
+        public static void LoadPostfix()
         {
-			if (Player.m_localPlayer == null)
-				return;
+            if (Player.m_localPlayer == null)
+                return;
 
-			Plugin.LoadFromDisk();
+            Plugin.LoadFromDisk();
         }
 
         [HarmonyPrefix]
@@ -40,12 +35,12 @@ namespace RuneTablet
             __result = RuneTablet.Consume(__instance);
 
             if (__result)
-			{
-				InventoryGui.instance.Hide();
+            {
+                InventoryGui.instance.Hide();
                 inventory.RemoveItem(item);
-			}
+            }
 
-			return false;
+            return false;
         }
     }
 }
