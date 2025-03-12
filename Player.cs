@@ -11,27 +11,22 @@ namespace RuneTablet
     public class PlayerPatches {
         [HarmonyPostfix]
         [HarmonyPatch(nameof(Player.Save))]
-        public static void SavePostfix(ZPackage pkg, Player __instance)
+		public static void SavePostfix()
         {
-            Plugin.Logger.LogInfo("Player.Save: Called");
+			if (Player.m_localPlayer == null)
+				return;
 
-            foreach (var name in Plugin.FoundRuneStones)
-                pkg.Write(name);
+			Plugin.SaveToDisk();
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(nameof(Player.Load))]
-        public static void LoadPostfix(ZPackage pkg, Player __instance)
+		public static void LoadPostfix()
         {
-            Plugin.Logger.LogInfo("Player.Load: Called");
+			if (Player.m_localPlayer == null)
+				return;
 
-            Plugin.FoundRuneStones.Clear();
-            while (pkg.GetPos() < pkg.Size())
-            {
-                var found = pkg.ReadString();
-                Plugin.FoundRuneStones.Add(found);
-                Plugin.Logger.LogInfo("Player.Load: Found runestone " + found);
-            }
+			Plugin.LoadFromDisk();
         }
 
         [HarmonyPrefix]
