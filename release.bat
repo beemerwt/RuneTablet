@@ -6,7 +6,7 @@ set "DLL_PATH=bin\Debug\net462\RuneTablet.dll"
 set "TEMP_DIR=RuneTablet"
 set "DLL_TEMP=RuneTablet.dll"
 
-set "ZIP_FILE=RuneTablet-1.0.0.zip"
+set "ZIP_FILE=RuneTablet-1.1.0.zip"
 
 :: Make necessary directories
 if not exist "%TEMP_DIR%" mkdir "%TEMP_DIR%"

@@ -12,13 +12,13 @@ using static FileHelpers;
 
 namespace RuneTablet
 {
-	[BepInDependency("com.jotunn.jotunn")]
+	[BepInDependency(Jotunn.Main.ModGuid)]
 	[BepInPlugin(RuneTabletGuid, RuneTabletName, NumericVersion)]
 	public class Plugin : BaseUnityPlugin
 	{
 		public const string RuneTabletGuid = "org.bepinex.plugins.rune_tablet";
 		public const string RuneTabletName = "Rune Tablet";
-		public const string NumericVersion = "1.0.0";
+		public const string NumericVersion = "1.1.0";
 
 		public static string SaveFile
 		{
