@@ -40,9 +40,12 @@ namespace RuneTablet
             __result = RuneTablet.Consume(__instance);
 
             if (__result)
+			{
+				InventoryGui.instance.Hide();
                 inventory.RemoveItem(item);
+			}
 
-            return !__result; // return false to skip the original method (opposite of true if we consumed the item)
+			return false;
         }
     }
 }
