@@ -53,7 +53,8 @@ namespace RuneTablet
 			Logger = base.Logger;
 			Logger.LogInfo($"Valheim game version: {Version.GetVersionString()}");
 
-			if (IsGameVersionTooOld()) {
+			if (IsGameVersionTooOld())
+			{
 				LogTooOld();
 				Logger.LogFatal("Aborting loading of Rune Tablet due to incompatible version.");
 				return;

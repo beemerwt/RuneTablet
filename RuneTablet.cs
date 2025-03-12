@@ -31,7 +31,8 @@ namespace RuneTablet
 					new RequirementConfig { Item = "RuneCrystal", Amount = 4 }
 				],
 			Weight = 10f,
-		}) { }
+		})
+		{ }
 
 		public static bool Consume(Player player)
 		{
@@ -70,7 +71,8 @@ namespace RuneTablet
 			float distance = float.PositiveInfinity;
 
 			List<ZoneSystem.LocationInstance> locations = [];
-			foreach (var type in types) {
+			foreach (var type in types)
+			{
 				List<ZoneSystem.LocationInstance> addLocations = [];
 				if (ZoneSystem.instance.FindLocations(type, ref addLocations))
 					locations.AddRange(addLocations);

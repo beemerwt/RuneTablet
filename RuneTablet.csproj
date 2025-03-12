@@ -94,4 +94,12 @@
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="xcopy /S /Y &quot;$(TargetDir)Assets&quot; &quot;$(VALHEIM_INSTALL)\BepInEx\plugins\RuneTablet\Assets\&quot;&#xD;&#xA;copy &quot;$(TargetDir)RuneTablet.dll&quot; &quot;$(VALHEIM_INSTALL)\BepInEx\plugins\RuneTablet\RuneTablet.dll&quot;&#xD;&#xA;copy &quot;$(TargetDir)RuneTablet.pdb&quot; &quot;$(VALHEIM_INSTALL)\BepInEx\plugins\RuneTablet\RuneTablet.pdb&quot;&#xD;&#xA;copy &quot;$(TargetDir)Jotunn.dll&quot; &quot;$(VALHEIM_INSTALL)\BepInEx\plugins\RuneTablet\Jotunn.dll&quot;" />
   </Target>
+  
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Beemer\RuneTablet\.editorconfig" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="C:\Users\Beemer\RuneTablet\.editorconfig" />
+  </ItemGroup>
 </Project>

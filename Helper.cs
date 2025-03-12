@@ -3,13 +3,13 @@
 namespace RuneTablet
 {
 	public static class Helper
-    {
-        public static string GetHashedName(RuneStone component)
-        {
-            var position = component.transform.position;
-            var hash = ((int)position.x * 31) + ((int)position.z * 37);
-            return component.name + "-" + hash.ToString();
-        }
+	{
+		public static string GetHashedName(RuneStone component)
+		{
+			var position = component.transform.position;
+			var hash = ((int)position.x * 31) + ((int)position.z * 37);
+			return component.name + "-" + hash.ToString();
+		}
 
 		public static ZoneSystem.LocationInstance? GetLocationInstance(Location location)
 		{
